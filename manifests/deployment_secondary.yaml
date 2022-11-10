@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: riseclipse-secondary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: riseclipse-poc
+      project: riseclipse-poc
+  template:
+    metadata:
+      labels:
+        app: riseclipse-poc
+        project: riseclipse-poc
+        service: riseclipse-secondary
+    spec:
+      containers:
+      - name: riseclipse-secondary
+        image: etiennedx/riseclipse-poc
+        ports:
+        - containerPort: 8080
+          name: http
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: 100m
+          limits:
+            memory: "128Mi"
+            cpu: 100m

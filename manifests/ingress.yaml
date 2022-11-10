@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: riseclipse-poc
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  labels:
+    app: riseclipse-poc
+    project: riseclipse-poc
+spec:
+  defaultBackend:
+    service:
+      name: riseclipse-main
+      port:
+        number: 80
+  # ingressClassName: nginx
+  rules:
+  - host: riseclipse-poc.vcap.me
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: riseclipse-main
+            port: 
+              number: 80
